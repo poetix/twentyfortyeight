@@ -18,11 +18,8 @@ def non_empty(row):
 def _crunch(row):
   if len(row)<=1: return row
   if row[0] == row[1]:
-    return crunch((row[0] + row[1],) + row[2:])
-  crunched = crunch(row[1:])
-  if row[0] == crunched[0]:
-    return crunch((row[0] + crunched[0],) + crunched[1:])
-  return row[:1] + crunched
+    return (row[0] + row[1],) + crunch(row[2:])
+  return row[:1] + crunch(row[1:])
 
 crunch = memoize(_crunch)
 
